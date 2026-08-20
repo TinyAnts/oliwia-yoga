@@ -181,22 +181,23 @@ function ContactForm({ t }: { t: (typeof translations)["en"]["contact"]["form"] 
     <form onSubmit={handleSubmit} className="bg-cream text-forest p-8 md:p-10 space-y-5" data-testid="form-contact">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="cf-name" className="eyebrow text-forest/60 block mb-2">{t.nameL}</label>
-          <input id="cf-name" name="name" required maxLength={100} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors" placeholder={t.namePh} data-testid="input-name" />
+          <label htmlFor="cf-name" className="eyebrow text-forest/60 block mb-2">{t.nameL} <span className="text-red-700" aria-hidden="true">*</span></label>
+          <input id="cf-name" name="name" required maxLength={100} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm text-forest placeholder:text-forest/40 focus:outline-none focus:border-gold transition-colors" placeholder={t.namePh} data-testid="input-name" />
         </div>
         <div>
-          <label htmlFor="cf-email" className="eyebrow text-forest/60 block mb-2">{t.emailL}</label>
-          <input id="cf-email" name="email" type="email" required maxLength={150} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors" placeholder={t.emailPh} data-testid="input-email" />
+          <label htmlFor="cf-email" className="eyebrow text-forest/60 block mb-2">{t.emailL} <span className="text-red-700" aria-hidden="true">*</span></label>
+          <input id="cf-email" name="email" type="email" required maxLength={150} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm text-forest placeholder:text-forest/40 focus:outline-none focus:border-gold transition-colors" placeholder={t.emailPh} data-testid="input-email" />
         </div>
       </div>
       <div>
-        <label htmlFor="cf-title" className="eyebrow text-forest/60 block mb-2">{t.subjL}</label>
-        <input id="cf-title" name="title" required maxLength={150} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors" placeholder={t.subjPh} data-testid="input-title" />
+        <label htmlFor="cf-title" className="eyebrow text-forest/60 block mb-2">{t.subjL} <span className="text-red-700" aria-hidden="true">*</span></label>
+        <input id="cf-title" name="title" required maxLength={150} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm text-forest placeholder:text-forest/40 focus:outline-none focus:border-gold transition-colors" placeholder={t.subjPh} data-testid="input-title" />
       </div>
       <div>
-        <label htmlFor="cf-message" className="eyebrow text-forest/60 block mb-2">{t.msgL}</label>
-        <textarea id="cf-message" name="message" required maxLength={4000} rows={5} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors resize-y" placeholder={t.msgPh} data-testid="input-message"></textarea>
+        <label htmlFor="cf-message" className="eyebrow text-forest/60 block mb-2">{t.msgL} <span className="text-red-700" aria-hidden="true">*</span></label>
+        <textarea id="cf-message" name="message" required maxLength={4000} rows={5} className="w-full bg-white border border-forest/15 px-4 py-3 text-sm text-forest placeholder:text-forest/40 focus:outline-none focus:border-gold transition-colors resize-y" placeholder={t.msgPh} data-testid="input-message"></textarea>
       </div>
+      <p className="text-[11px] text-forest/60"><span className="text-red-700">*</span> {t.requiredNote}</p>
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <Button type="submit" disabled={status === "sending"} size="lg" className="rounded-none px-9 py-6 bg-forest text-cream hover:bg-forest/90 tracking-wide font-medium disabled:opacity-60" data-testid="button-form-send">
           {status === "sending" ? t.sending : t.send}
