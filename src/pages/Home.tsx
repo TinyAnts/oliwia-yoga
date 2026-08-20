@@ -313,13 +313,30 @@ export default function Home() {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollTo('why-yoga')} className={`text-sm hover:text-gold transition-colors tracking-wide ${navDark ? 'text-cream/80' : 'text-forest/80'}`} data-testid="link-nav-why">{t.nav.why}</button>
-            <button onClick={() => scrollTo('classes')} className={`text-sm hover:text-gold transition-colors tracking-wide ${navDark ? 'text-cream/80' : 'text-forest/80'}`} data-testid="link-nav-classes">{t.nav.classes}</button>
-            <button onClick={() => scrollTo('credentials')} className={`text-sm hover:text-gold transition-colors tracking-wide ${navDark ? 'text-cream/80' : 'text-forest/80'}`} data-testid="link-nav-credentials">{t.nav.credentials}</button>
-            <button onClick={() => scrollTo('about')} className={`text-sm hover:text-gold transition-colors tracking-wide ${navDark ? 'text-cream/80' : 'text-forest/80'}`} data-testid="link-nav-about">{t.nav.about}</button>
+            {(["why", "classes", "credentials", "about"] as const).map((key) => {
+              const targets = { why: "why-yoga", classes: "classes", credentials: "credentials", about: "about" } as const;
+              const longest = LANGS.map((l) => translations[l.code].nav[key]).reduce((a, b) => (b.length > a.length ? b : a));
+              return (
+                <button
+                  key={key}
+                  onClick={() => scrollTo(targets[key])}
+                  className={`relative text-sm hover:text-gold transition-colors tracking-wide text-center ${navDark ? 'text-cream/80' : 'text-forest/80'}`}
+                  data-testid={`link-nav-${key}`}
+                >
+                  {/* Invisible longest translation reserves a stable width */}
+                  <span className="invisible whitespace-nowrap block" aria-hidden="true">{longest}</span>
+                  <span className="absolute inset-0 flex items-center justify-center whitespace-nowrap">{t.nav[key]}</span>
+                </button>
+              );
+            })}
             {langButtons(navDark)}
             <Button onClick={() => scrollTo('contact')} className="rounded-none px-7 bg-accent text-forest hover:bg-accent/90 font-medium tracking-wide" data-testid="button-nav-contact">
-              {t.nav.cta}
+              <span className="relative block">
+                <span className="invisible whitespace-nowrap block" aria-hidden="true">
+                  {LANGS.map((l) => translations[l.code].nav.cta).reduce((a, b) => (b.length > a.length ? b : a))}
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center whitespace-nowrap">{t.nav.cta}</span>
+              </span>
             </Button>
           </div>
 
