@@ -17,10 +17,18 @@ import {
   Mail,
   ArrowRight,
   ArrowUpRight,
+  ArrowUp,
+  Quote,
   Menu,
   X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { translations, LANGS, type Lang } from "@/i18n";
 
 import warriorPhoto from "@/assets/images/yoga-warrior.webp";
@@ -129,6 +137,20 @@ const reveal = {
 
 const HERO_LIGHT = true;
 
+/*
+ * Testimonials stay hidden until real student quotes are in.
+ * To publish them: replace the sample quotes below with real ones
+ * and set SHOW_TESTIMONIALS to true.
+ * To preview the section on the live site: open the page with ?demo-testimonials
+ */
+const SHOW_TESTIMONIALS = false;
+
+const TESTIMONIALS = [
+  { quote: "Sample quote — replace me with a real student's words. After two months of Healthy Spine classes my desk-day back pain is basically gone.", name: "Student name", detail: "Healthy Spine & Stretching" },
+  { quote: "Sample quote — replace me with a real student's words. I was scared yoga wasn't for stiff beginners like me. Oliwia proved me wrong in one class.", name: "Student name", detail: "Beginner Vinyasa" },
+  { quote: "Sample quote — replace me with a real student's words. Yoga Nidra with Oliwia is the deepest rest I get all week. I sleep better every time.", name: "Student name", detail: "Yoga Nidra" },
+];
+
 function initialLang(): Lang {
   const q = new URLSearchParams(window.location.search).get("lang");
   if (q === "de" || q === "pl" || q === "fr" || q === "en") return q;
@@ -213,6 +235,29 @@ function ContactForm({ t }: { t: (typeof translations)["en"]["contact"]["form"] 
   );
 }
 
+/* Floating back-to-top button */
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 700);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <motion.button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+      initial={false}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 16, pointerEvents: visible ? "auto" : "none" }}
+      transition={{ duration: 0.25 }}
+      className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-forest text-gold border border-gold/40 shadow-xl flex items-center justify-center hover:bg-forest/90 hover:-translate-y-1 transition-all"
+      data-testid="button-back-to-top"
+    >
+      <ArrowUp size={20} />
+    </motion.button>
+  );
+}
+
 /* Slim ticker */
 function Ticker({ items }: { items: readonly string[] }) {
   const row = [...items, ...items];
@@ -238,6 +283,7 @@ export default function Home() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25 });
 
   const t = translations[lang];
+  const showTestimonials = SHOW_TESTIMONIALS || new URLSearchParams(window.location.search).has("demo-testimonials");
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -744,6 +790,86 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 5b. Testimonials (hidden until real quotes are in — see SHOW_TESTIMONIALS) */}
+      {showTestimonials && (
+        <section id="testimonials" className="py-28 bg-background relative overflow-hidden">
+          <div className="container mx-auto px-6 md:px-12">
+            <motion.div {...reveal} className="text-center max-w-2xl mx-auto mb-16">
+              <div className="eyebrow text-gold mb-5 flex items-center justify-center gap-4">
+                <span className="w-10 gold-rule inline-block rotate-180"></span>
+                {t.testimonials.eyebrow}
+                <span className="w-10 gold-rule inline-block"></span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-medium">
+                {t.testimonials.title1} <span className="font-heading-italic text-gold">{t.testimonials.title2}</span>
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {TESTIMONIALS.map((item, i) => (
+                <motion.figure
+                  key={i}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, delay: i * 0.12 }}
+                  className="bg-white border border-border p-8 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all"
+                  data-testid={`card-testimonial-${i}`}
+                >
+                  <Quote size={26} className="text-gold mb-5" aria-hidden="true" />
+                  <blockquote className="text-forest/85 font-light leading-relaxed flex-grow">{item.quote}</blockquote>
+                  <figcaption className="mt-6 pt-5 border-t border-border">
+                    <div className="font-heading text-lg text-forest">{item.name}</div>
+                    <div className="text-xs text-muted-foreground tracking-wide mt-0.5">{item.detail}</div>
+                  </figcaption>
+                </motion.figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 5c. FAQ */}
+      <section id="faq" className="py-28 bg-cream relative overflow-hidden">
+        <div className="absolute top-16 right-[-6%] w-80 h-80 rounded-full bg-accent/15 blur-3xl animate-drift" aria-hidden="true"></div>
+        <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10">
+          <motion.div {...reveal} className="text-center mb-14">
+            <div className="eyebrow text-gold mb-5 flex items-center justify-center gap-4">
+              <span className="w-10 gold-rule inline-block rotate-180"></span>
+              {t.faq.eyebrow}
+              <span className="w-10 gold-rule inline-block"></span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-medium">
+              {t.faq.title1} <span className="font-heading-italic text-gold">{t.faq.title2}</span>
+            </h2>
+          </motion.div>
+
+          <Accordion type="single" collapsible className="w-full space-y-3">
+            {t.faq.items.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+              >
+                <AccordionItem value={`faq-${index}`} className="border border-border bg-white px-6 data-[state=open]:border-gold/50 data-[state=open]:shadow-lg transition-all">
+                  <AccordionTrigger className="text-left font-heading text-lg md:text-xl py-5 hover:no-underline hover:text-gold text-forest">
+                    <span className="flex items-baseline gap-4">
+                      <span className="font-heading-italic text-gold/50 text-base shrink-0" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                      {faq.q}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground font-light leading-relaxed pb-6 pt-0 pl-10">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* 6. Contact */}
       <section id="contact" className="bg-forest text-cream py-28 relative overflow-hidden">
         <div className="absolute left-[-10%] top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">
@@ -812,6 +938,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <BackToTop />
     </div>
   );
 }

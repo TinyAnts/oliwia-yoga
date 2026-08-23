@@ -109,6 +109,24 @@ const en = {
       errorText: "Oh no, something went wrong. Please email me directly:",
     },
   },
+  faq: {
+    eyebrow: "Good to Know",
+    title1: "Questions I hear",
+    title2: "all the time.",
+    items: [
+      { q: "Do I need to be flexible to start?", a: "Not at all, that's like thinking you need to be clean to take a shower. Flexibility is a result of yoga, never a requirement. We start exactly where your body is today." },
+      { q: "I've never done yoga before. Which class is for me?", a: "Healthy Spine & Stretching or a gentle Vinyasa is the friendliest way in. Slow pace, lots of explanation, zero pressure. Write me a message and I'll help you choose." },
+      { q: "What should I bring to a class?", a: "Comfortable clothes you can move in, a bottle of water, and if you have your own mat, bring it along. Studios usually have mats to borrow. That's honestly it." },
+      { q: "I have back pain. Is yoga safe for me?", a: "In most cases yes, and it's often exactly what helps: yoga is listed among first-line approaches for chronic low back pain. Tell me about your back before class and I'll adapt every pose. With serious or acute conditions, please check with your doctor first." },
+      { q: "Can I practice while pregnant?", a: "Yes, with the right adaptations. I love teaching mums-to-be and I adjust every pose so you and your baby are safe and comfortable. Just tell me how far along you are." },
+      { q: "In which languages do you teach?", a: "I teach in English and Polish, both in person and online." },
+    ],
+  },
+  testimonials: {
+    eyebrow: "Kind Words",
+    title1: "What my students",
+    title2: "say about class.",
+  },
   footer: { tagline: "RYT-200® Yoga Alliance · Trained in India", rights: "All rights reserved." },
 };
 
@@ -213,6 +231,24 @@ const de: typeof en = {
       successTitle: "Danke dir!", successBody: "Deine Nachricht ist unterwegs zu mir. Ich antworte meist innerhalb von ein bis zwei Tagen. Bis bald!",
       errorText: "Oh nein, da ist etwas schiefgelaufen. Schreib mir bitte direkt:",
     },
+  },
+  faq: {
+    eyebrow: "Gut zu wissen",
+    title1: "Fragen, die ich",
+    title2: "ständig höre.",
+    items: [
+      { q: "Muss ich gelenkig sein, um anzufangen?", a: "Überhaupt nicht, das wäre, als müsste man sauber sein, um duschen zu gehen. Beweglichkeit ist ein Ergebnis von Yoga, nie eine Voraussetzung. Wir fangen genau da an, wo dein Körper heute steht." },
+      { q: "Ich habe noch nie Yoga gemacht. Welcher Kurs passt zu mir?", a: "Gesunder Rücken & Stretching oder ein sanftes Vinyasa ist der freundlichste Einstieg. Langsames Tempo, viele Erklärungen, null Druck. Schreib mir und ich helfe dir bei der Wahl." },
+      { q: "Was soll ich zum Kurs mitbringen?", a: "Bequeme Kleidung, in der du dich bewegen kannst, eine Flasche Wasser, und wenn du eine eigene Matte hast, bring sie gern mit. Studios haben meist Leihmatten. Das war's ehrlich gesagt schon." },
+      { q: "Ich habe Rückenschmerzen. Ist Yoga sicher für mich?", a: "Meistens ja, und oft ist es genau das, was hilft: Yoga zählt zu den ersten empfohlenen Ansätzen bei chronischen Rückenschmerzen. Erzähl mir vor der Stunde von deinem Rücken und ich passe jede Haltung an. Bei ernsten oder akuten Beschwerden sprich bitte zuerst mit deinem Arzt." },
+      { q: "Kann ich in der Schwangerschaft praktizieren?", a: "Ja, mit den richtigen Anpassungen. Ich unterrichte werdende Mamas sehr gern und passe jede Haltung so an, dass du und dein Baby sicher und bequem seid. Sag mir einfach, in welcher Woche du bist." },
+      { q: "In welchen Sprachen unterrichtest du?", a: "Ich unterrichte auf Englisch und Polnisch, vor Ort und online." },
+    ],
+  },
+  testimonials: {
+    eyebrow: "Liebe Worte",
+    title1: "Was meine Schüler",
+    title2: "über den Unterricht sagen.",
   },
   footer: { tagline: "RYT-200® Yoga Alliance · Ausgebildet in Indien", rights: "Alle Rechte vorbehalten." },
 };
@@ -319,6 +355,24 @@ const pl: typeof en = {
       errorText: "Ojej, coś poszło nie tak. Napisz do mnie bezpośrednio:",
     },
   },
+  faq: {
+    eyebrow: "Warto wiedzieć",
+    title1: "Pytania, które słyszę",
+    title2: "cały czas.",
+    items: [
+      { q: "Czy muszę być gibka, żeby zacząć?", a: "Wcale nie, to tak, jakby myśleć, że trzeba być czystym, żeby wziąć prysznic. Gibkość to efekt jogi, nigdy warunek. Zaczynamy dokładnie tam, gdzie twoje ciało jest dzisiaj." },
+      { q: "Nigdy nie ćwiczyłam jogi. Jakie zajęcia wybrać?", a: "Zdrowy Kręgosłup i Stretching albo łagodna Vinyasa to najprzyjaźniejszy początek. Spokojne tempo, dużo tłumaczenia, zero presji. Napisz do mnie, a pomogę ci wybrać." },
+      { q: "Co zabrać na zajęcia?", a: "Wygodne ubranie, w którym możesz się ruszać, butelkę wody, a jeśli masz własną matę, weź ją ze sobą. W studiach zwykle można pożyczyć matę na miejscu. Naprawdę nic więcej nie trzeba." },
+      { q: "Bolą mnie plecy. Czy joga jest dla mnie bezpieczna?", a: "W większości przypadków tak, i często to właśnie ona pomaga: joga jest wymieniana wśród pierwszych zalecanych metod przy przewlekłym bólu pleców. Powiedz mi o swoich plecach przed zajęciami, a dostosuję każdą pozycję. Przy poważnych lub ostrych dolegliwościach skonsultuj się najpierw z lekarzem." },
+      { q: "Czy mogę ćwiczyć w ciąży?", a: "Tak, z odpowiednimi modyfikacjami. Uwielbiam uczyć przyszłe mamy i dostosowuję każdą pozycję tak, żebyś ty i twoje maleństwo byli bezpieczni i wygodni. Po prostu powiedz mi, w którym jesteś tygodniu." },
+      { q: "W jakich językach uczysz?", a: "Uczę po polsku i po angielsku, stacjonarnie i online." },
+    ],
+  },
+  testimonials: {
+    eyebrow: "Miłe słowa",
+    title1: "Co moi uczniowie",
+    title2: "mówią o zajęciach.",
+  },
   footer: { tagline: "RYT-200® Yoga Alliance · Szkolona w Indiach", rights: "Wszelkie prawa zastrzeżone." },
 };
 
@@ -423,6 +477,24 @@ const fr: typeof en = {
       successTitle: "Merci !", successBody: "Votre message est en route. Je réponds généralement sous un à deux jours. À très vite !",
       errorText: "Oh non, quelque chose n'a pas marché. Écrivez-moi directement :",
     },
+  },
+  faq: {
+    eyebrow: "Bon à savoir",
+    title1: "Les questions qu'on me pose",
+    title2: "tout le temps.",
+    items: [
+      { q: "Faut-il être souple pour commencer ?", a: "Pas du tout, c'est comme penser qu'il faut être propre pour prendre une douche. La souplesse est un résultat du yoga, jamais une condition. On commence exactement là où votre corps en est aujourd'hui." },
+      { q: "Je n'ai jamais fait de yoga. Quel cours choisir ?", a: "Dos en Santé & Stretching ou un Vinyasa doux est la porte d'entrée la plus accueillante. Rythme lent, beaucoup d'explications, zéro pression. Écrivez-moi et je vous aiderai à choisir." },
+      { q: "Que dois-je apporter en cours ?", a: "Des vêtements confortables dans lesquels vous pouvez bouger, une bouteille d'eau, et si vous avez votre propre tapis, apportez-le. Les studios en prêtent généralement. C'est vraiment tout." },
+      { q: "J'ai mal au dos. Le yoga est-il sûr pour moi ?", a: "Dans la plupart des cas oui, et c'est souvent exactement ce qui aide : le yoga figure parmi les premières approches recommandées contre la lombalgie chronique. Parlez-moi de votre dos avant le cours et j'adapterai chaque posture. En cas de problème sérieux ou aigu, consultez d'abord votre médecin." },
+      { q: "Puis-je pratiquer enceinte ?", a: "Oui, avec les bonnes adaptations. J'adore enseigner aux futures mamans et j'ajuste chaque posture pour que vous et votre bébé soyez en sécurité et à l'aise. Dites-moi simplement où vous en êtes." },
+      { q: "Dans quelles langues enseignez-vous ?", a: "J'enseigne en anglais et en polonais, en présentiel et en ligne." },
+    ],
+  },
+  testimonials: {
+    eyebrow: "Mots doux",
+    title1: "Ce que mes élèves",
+    title2: "disent des cours.",
   },
   footer: { tagline: "RYT-200® Yoga Alliance · Formée en Inde", rights: "Tous droits réservés." },
 };

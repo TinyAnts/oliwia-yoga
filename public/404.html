@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Oliwia Konieczna Yoga</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #22392B;
+      color: #F5EFE3;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+    .ring {
+      position: fixed; border: 1px solid rgba(208,171,101,.25); border-radius: 50%;
+      animation: breathe 7s ease-in-out infinite;
+    }
+    .r1 { width: 480px; height: 480px; top: -160px; left: -140px; }
+    .r2 { width: 380px; height: 380px; bottom: -120px; right: -100px; animation-delay: 2s; }
+    @keyframes breathe { 0%,100% { transform: scale(1); opacity: .5; } 50% { transform: scale(1.12); opacity: 1; } }
+    .card { position: relative; z-index: 1; max-width: 560px; }
+    .num {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(6rem, 20vw, 10rem); line-height: 1; color: #D0AB65;
+    }
+    h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(1.5rem, 4vw, 2.2rem); margin: 14px 0 12px; }
+    p { color: rgba(245,239,227,.65); font-weight: 300; line-height: 1.7; margin-bottom: 30px; }
+    a.btn {
+      display: inline-block; background: #D0AB65; color: #22392B; text-decoration: none;
+      font-weight: 500; letter-spacing: .06em; padding: 15px 38px; transition: transform .2s, opacity .2s;
+    }
+    a.btn:hover { transform: translateY(-2px); opacity: .92; }
+    .sig { margin-top: 36px; font-family: 'Cormorant Garamond', serif; font-style: italic; color: rgba(208,171,101,.6); font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="card">
+    <div class="num">404</div>
+    <h1>This page has drifted into savasana.</h1>
+    <p>The page you're looking for doesn't exist or has moved. Take a breath, and let's return to the mat.</p>
+    <a class="btn" href="/">Back to the practice</a>
+    <div class="sig">om shanti</div>
+  </div>
+</body>
+</html>
