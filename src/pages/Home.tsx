@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useSpring, useInView } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring, useInView } from "framer-motion";
 import {
   Instagram,
   Youtube,
@@ -235,6 +235,196 @@ function ContactForm({ t }: { t: (typeof translations)["en"]["contact"]["form"] 
   );
 }
 
+/* Fine-line mandala ornament */
+function Mandala({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 200 200" className={className} fill="none" stroke="currentColor" aria-hidden="true">
+      <circle cx="100" cy="100" r="97" strokeWidth="0.6" />
+      <circle cx="100" cy="100" r="80" strokeWidth="0.5" />
+      <circle cx="100" cy="100" r="56" strokeWidth="0.5" />
+      <circle cx="100" cy="100" r="28" strokeWidth="0.5" />
+      <circle cx="100" cy="100" r="8" strokeWidth="0.6" />
+      {Array.from({ length: 12 }).map((_, i) => (
+        <path
+          key={`o-${i}`}
+          d="M100,20 C109,42 109,62 100,80 C91,62 91,42 100,20 Z"
+          strokeWidth="0.6"
+          transform={`rotate(${i * 30} 100 100)`}
+        />
+      ))}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <path
+          key={`n-${i}`}
+          d="M100,56 C105,70 105,82 100,92 C95,82 95,70 100,56 Z"
+          strokeWidth="0.5"
+          transform={`rotate(${i * 45 + 22.5} 100 100)`}
+        />
+      ))}
+      {Array.from({ length: 24 }).map((_, i) => (
+        <circle key={`d-${i}`} cx="100" cy="12" r="1" fill="currentColor" stroke="none" transform={`rotate(${i * 15} 100 100)`} />
+      ))}
+    </svg>
+  );
+}
+
+/* Lotus flower that draws itself in as you scroll to it */
+function LotusDivider({ className }: { className?: string }) {
+  const petal = "M130,54 C122,40 122,20 130,5 C138,20 138,40 130,54 Z";
+  return (
+    <div className={`flex items-center justify-center gap-6 ${className ?? ""}`} aria-hidden="true">
+      <motion.span
+        className="gold-rule w-16 md:w-28 inline-block origin-right"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        style={{ transform: "rotate(180deg)" }}
+      />
+      <svg viewBox="95 0 70 58" className="w-16 h-13 text-gold" fill="none" stroke="currentColor">
+        {[-56, -28, 0, 28, 56].map((a, i) => (
+          <motion.path
+            key={a}
+            d={petal}
+            strokeWidth="1.1"
+            transform={`rotate(${a} 130 54)`}
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 1.1, delay: 0.15 + i * 0.15, ease: "easeInOut" }}
+          />
+        ))}
+      </svg>
+      <motion.span
+        className="gold-rule w-16 md:w-28 inline-block origin-left"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      />
+    </div>
+  );
+}
+
+/* Rotating ancient-wisdom quotes */
+function WisdomBand({ t }: { t: (typeof translations)["en"]["wisdom"] }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setIdx((i) => (i + 1) % t.quotes.length), 7000);
+    return () => clearInterval(timer);
+  }, [t.quotes.length]);
+  const q = t.quotes[idx];
+  return (
+    <section className="bg-forest text-cream py-20 md:py-24 relative overflow-hidden" aria-label="Yoga wisdom">
+      <Mandala className="absolute -left-28 -top-28 w-[26rem] h-[26rem] text-gold/15 animate-mandala" />
+      <Mandala className="absolute -right-32 -bottom-32 w-[30rem] h-[30rem] text-gold/10 animate-mandala-reverse" />
+      <span className="absolute right-[8%] top-6 font-heading text-7xl text-gold/15 animate-om select-none" aria-hidden="true">ॐ</span>
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10 text-center">
+        <div className="eyebrow text-gold mb-8 flex items-center justify-center gap-4">
+          <span className="w-10 gold-rule inline-block rotate-180"></span>
+          {t.eyebrow}
+          <span className="w-10 gold-rule inline-block"></span>
+        </div>
+        <div className="max-w-3xl mx-auto min-h-[190px] md:min-h-[170px] flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.blockquote
+              key={idx}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {"sanskrit" in q && q.sanskrit && (
+                <div className="text-gold/80 text-xl md:text-2xl mb-4 tracking-wide">{q.sanskrit}</div>
+              )}
+              <p className="font-heading-italic text-2xl md:text-4xl leading-snug text-cream/95">
+                “{q.text}”
+              </p>
+              <footer className="eyebrow text-gold/80 mt-6">— {q.author}</footer>
+            </motion.blockquote>
+          </AnimatePresence>
+        </div>
+        <div className="flex items-center justify-center gap-2.5 mt-6" role="tablist" aria-label="Quotes">
+          {t.quotes.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIdx(i)}
+              aria-label={`Quote ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-500 ${i === idx ? "w-8 bg-gold" : "w-1.5 bg-cream/25 hover:bg-cream/50"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* Guided breathing circle */
+function BreathBand({ t }: { t: (typeof translations)["en"]["breath"] }) {
+  const [phase, setPhase] = useState<"in" | "out">("in");
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { margin: "-80px" });
+  useEffect(() => {
+    if (!inView) return;
+    const timer = setInterval(() => setPhase((p) => (p === "in" ? "out" : "in")), 4000);
+    return () => clearInterval(timer);
+  }, [inView]);
+
+  return (
+    <section ref={sectionRef} className="py-24 md:py-28 bg-background relative overflow-hidden" aria-label="Breathing exercise">
+      <Mandala className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[46rem] h-[46rem] text-gold/10 animate-mandala" />
+      <div className="container mx-auto px-6 md:px-12 relative z-10 text-center">
+        <div className="eyebrow text-gold mb-5 flex items-center justify-center gap-4">
+          <span className="w-10 gold-rule inline-block rotate-180"></span>
+          {t.eyebrow}
+          <span className="w-10 gold-rule inline-block"></span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-medium mb-4">
+          {t.title1} <span className="font-heading-italic text-gold">{t.title2}</span>
+        </h2>
+        <p className="text-muted-foreground font-light max-w-md mx-auto mb-14">{t.sub}</p>
+
+        <div className="relative w-56 h-56 md:w-64 md:h-64 mx-auto" data-testid="breathing-circle">
+          {/* Static guide rings */}
+          <div className="absolute inset-0 rounded-full border border-gold/25" aria-hidden="true"></div>
+          <div className="absolute -inset-5 rounded-full border border-gold/15" aria-hidden="true"></div>
+          <div className="absolute -inset-10 rounded-full border border-gold/10" aria-hidden="true"></div>
+          {/* Breathing core */}
+          <motion.div
+            className="absolute inset-6 rounded-full bg-forest flex items-center justify-center shadow-2xl"
+            animate={{ scale: phase === "in" ? 1.22 : 0.92 }}
+            transition={{ duration: 4, ease: "easeInOut" }}
+          >
+            <span className="font-heading text-5xl text-gold/90 select-none" aria-hidden="true">ॐ</span>
+          </motion.div>
+          {/* Soft halo that follows the breath */}
+          <motion.div
+            className="absolute inset-2 rounded-full bg-gold/20 blur-2xl"
+            animate={{ scale: phase === "in" ? 1.35 : 0.85, opacity: phase === "in" ? 0.7 : 0.3 }}
+            transition={{ duration: 4, ease: "easeInOut" }}
+            aria-hidden="true"
+          />
+        </div>
+
+        <div className="h-8 mt-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={phase}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.6 }}
+              className="eyebrow text-forest/70 text-sm"
+            >
+              {phase === "in" ? t.inhale : t.exhale}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* Floating back-to-top button */
 function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -420,6 +610,19 @@ export default function Home() {
         <span className="absolute -top-10 left-[38%] font-heading-italic text-[16rem] text-forest/[0.045] select-none leading-none pointer-events-none hidden lg:block" aria-hidden="true">
           yoga
         </span>
+        <Mandala className="absolute -left-40 -bottom-44 w-[30rem] h-[30rem] text-gold/20 animate-mandala pointer-events-none hidden md:block" />
+        <span className="absolute top-28 right-[5%] font-heading text-6xl text-gold/25 animate-om select-none pointer-events-none hidden lg:block" aria-hidden="true">ॐ</span>
+        {/* Drifting petals */}
+        {[
+          { cls: "left-[8%] bottom-24 w-4", delay: "0s" },
+          { cls: "left-[30%] bottom-10 w-3", delay: "3.5s" },
+          { cls: "left-[46%] bottom-32 w-5", delay: "7s" },
+          { cls: "right-[12%] bottom-16 w-3.5", delay: "5s" },
+        ].map((p, i) => (
+          <svg key={i} viewBox="0 0 24 24" className={`absolute ${p.cls} text-gold/40 animate-petal pointer-events-none`} style={{ animationDelay: p.delay }} fill="currentColor" aria-hidden="true">
+            <path d="M12 2 C17 8 17 16 12 22 C7 16 7 8 12 2 Z" />
+          </svg>
+        ))}
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-10 items-center">
@@ -477,6 +680,7 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
+              <div className="absolute -inset-10 bg-gold/20 blur-3xl animate-glow-soft rounded-full pointer-events-none" aria-hidden="true"></div>
               <div className="absolute inset-0 border-2 border-accent translate-x-5 translate-y-5 pointer-events-none" aria-hidden="true"></div>
               <div className="relative aspect-[4/5] max-h-[72vh] w-full overflow-hidden">
                 <img
@@ -686,8 +890,10 @@ export default function Home() {
       </section>
 
       {/* 4. Credentials */}
-      <section id="credentials" className="py-28 bg-background">
-        <div className="container mx-auto px-6 md:px-12">
+      <section id="credentials" className="py-28 bg-background relative overflow-hidden">
+        <Mandala className="absolute -right-40 top-10 w-[26rem] h-[26rem] text-gold/10 animate-mandala-reverse pointer-events-none" />
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <LotusDivider className="mb-12" />
           <motion.div {...reveal} className="text-center max-w-2xl mx-auto mb-16">
             <div className="eyebrow text-gold mb-5 flex items-center justify-center gap-4">
               <span className="w-10 gold-rule inline-block rotate-180"></span>
@@ -726,9 +932,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 4b. Ancient wisdom quotes */}
+      <WisdomBand t={t.wisdom} />
+
       {/* 5. About */}
       <section id="about" className="py-28 bg-cream relative overflow-hidden">
-        <div className="container mx-auto px-6 md:px-12">
+        <Mandala className="absolute -left-44 -bottom-44 w-[30rem] h-[30rem] text-gold/15 animate-mandala pointer-events-none" />
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div {...reveal} className="relative h-[520px] md:h-[600px]">
               <div className="absolute left-0 top-0 w-[62%] h-[75%] overflow-hidden rounded-t-[8rem] shadow-2xl z-10">
@@ -833,6 +1043,7 @@ export default function Home() {
       <section id="faq" className="py-28 bg-cream relative overflow-hidden">
         <div className="absolute top-16 right-[-6%] w-80 h-80 rounded-full bg-accent/15 blur-3xl animate-drift" aria-hidden="true"></div>
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10">
+          <LotusDivider className="mb-10" />
           <motion.div {...reveal} className="text-center mb-14">
             <div className="eyebrow text-gold mb-5 flex items-center justify-center gap-4">
               <span className="w-10 gold-rule inline-block rotate-180"></span>
@@ -870,11 +1081,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 5d. Guided breath */}
+      <BreathBand t={t.breath} />
+
       {/* 6. Contact */}
       <section id="contact" className="bg-forest text-cream py-28 relative overflow-hidden">
         <div className="absolute left-[-10%] top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">
           <div className="w-[30rem] h-[30rem] rounded-full border border-accent/20 animate-breathe"></div>
         </div>
+        <Mandala className="absolute -right-36 -top-36 w-[32rem] h-[32rem] text-gold/10 animate-mandala-reverse pointer-events-none" />
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <motion.div {...reveal}>

@@ -191,9 +191,56 @@
   animation: drift 24s ease-in-out infinite reverse;
 }
 
+@keyframes mandala-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-mandala {
+  animation: mandala-spin 90s linear infinite;
+}
+.animate-mandala-reverse {
+  animation: mandala-spin 120s linear infinite reverse;
+}
+
+@keyframes halo-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.06); opacity: 0.7; }
+}
+.animate-halo {
+  animation: halo-pulse 6s ease-in-out infinite;
+}
+
+@keyframes petal-rise {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  12% { opacity: 0.7; }
+  85% { opacity: 0.5; }
+  100% { transform: translateY(-120px) rotate(50deg); opacity: 0; }
+}
+.animate-petal {
+  animation: petal-rise 11s ease-in-out infinite;
+}
+
+@keyframes om-drift {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+.animate-om {
+  animation: om-drift 9s ease-in-out infinite;
+}
+
+@keyframes glow-soft {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
+}
+.animate-glow-soft {
+  animation: glow-soft 8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-kenburns, .animate-ticker, .animate-breathe, .animate-breathe-slow,
-  .animate-float, .animate-drift, .animate-drift-slow {
+  .animate-float, .animate-drift, .animate-drift-slow,
+  .animate-mandala, .animate-mandala-reverse, .animate-halo,
+  .animate-petal, .animate-om, .animate-glow-soft {
     animation: none;
   }
 }

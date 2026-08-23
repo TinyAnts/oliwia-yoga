@@ -127,6 +127,22 @@ const en = {
     title1: "What my students",
     title2: "say about class.",
   },
+  wisdom: {
+    eyebrow: "Ancient Wisdom",
+    quotes: [
+      { text: "Yoga is the journey of the self, through the self, to the self.", author: "Bhagavad Gita" },
+      { text: "Yoga is the stilling of the fluctuations of the mind.", sanskrit: "योगश्चित्तवृत्तिनिरोधः", author: "Patanjali, Yoga Sutras" },
+      { text: "Yoga does not just change the way we see things, it transforms the person who sees.", author: "B.K.S. Iyengar" },
+    ],
+  },
+  breath: {
+    eyebrow: "A Moment of Stillness",
+    title1: "Breathe",
+    title2: "with me.",
+    sub: "Four seconds in, four seconds out. Follow the circle for a few rounds — this is where every practice begins.",
+    inhale: "Inhale",
+    exhale: "Exhale",
+  },
   footer: { tagline: "RYT-200® Yoga Alliance · Trained in India", rights: "All rights reserved." },
 };
 
@@ -249,6 +265,22 @@ const de: typeof en = {
     eyebrow: "Liebe Worte",
     title1: "Was meine Schüler",
     title2: "über den Unterricht sagen.",
+  },
+  wisdom: {
+    eyebrow: "Alte Weisheit",
+    quotes: [
+      { text: "Yoga ist die Reise des Selbst, durch das Selbst, zum Selbst.", author: "Bhagavad Gita" },
+      { text: "Yoga ist das Zur-Ruhe-Kommen der Bewegungen des Geistes.", sanskrit: "योगश्चित्तवृत्तिनिरोधः", author: "Patanjali, Yoga Sutras" },
+      { text: "Yoga verändert nicht nur, wie wir die Dinge sehen, es verwandelt den Menschen, der sieht.", author: "B.K.S. Iyengar" },
+    ],
+  },
+  breath: {
+    eyebrow: "Ein Moment der Stille",
+    title1: "Atme",
+    title2: "mit mir.",
+    sub: "Vier Sekunden ein, vier Sekunden aus. Folge dem Kreis ein paar Runden — hier beginnt jede Praxis.",
+    inhale: "Einatmen",
+    exhale: "Ausatmen",
   },
   footer: { tagline: "RYT-200® Yoga Alliance · Ausgebildet in Indien", rights: "Alle Rechte vorbehalten." },
 };
@@ -373,6 +405,22 @@ const pl: typeof en = {
     title1: "Co moi uczniowie",
     title2: "mówią o zajęciach.",
   },
+  wisdom: {
+    eyebrow: "Dawna mądrość",
+    quotes: [
+      { text: "Joga to podróż siebie, przez siebie, do siebie.", author: "Bhagawadgita" },
+      { text: "Joga jest uspokojeniem poruszeń umysłu.", sanskrit: "योगश्चित्तवृत्तिनिरोधः", author: "Patańdżali, Jogasutry" },
+      { text: "Joga nie tylko zmienia sposób, w jaki widzimy rzeczy. Przemienia tego, kto patrzy.", author: "B.K.S. Iyengar" },
+    ],
+  },
+  breath: {
+    eyebrow: "Chwila ciszy",
+    title1: "Oddychaj",
+    title2: "ze mną.",
+    sub: "Cztery sekundy wdechu, cztery wydechu. Podążaj za kołem przez kilka rund — tu zaczyna się każda praktyka.",
+    inhale: "Wdech",
+    exhale: "Wydech",
+  },
   footer: { tagline: "RYT-200® Yoga Alliance · Szkolona w Indiach", rights: "Wszelkie prawa zastrzeżone." },
 };
 
@@ -495,6 +543,22 @@ const fr: typeof en = {
     eyebrow: "Mots doux",
     title1: "Ce que mes élèves",
     title2: "disent des cours.",
+  },
+  wisdom: {
+    eyebrow: "Sagesse ancienne",
+    quotes: [
+      { text: "Le yoga est le voyage du soi, à travers le soi, vers le soi.", author: "Bhagavad Gita" },
+      { text: "Le yoga est l'apaisement des fluctuations du mental.", sanskrit: "योगश्चित्तवृत्तिनिरोधः", author: "Patanjali, Yoga Sutras" },
+      { text: "Le yoga ne change pas seulement notre façon de voir les choses, il transforme la personne qui regarde.", author: "B.K.S. Iyengar" },
+    ],
+  },
+  breath: {
+    eyebrow: "Un moment de calme",
+    title1: "Respirez",
+    title2: "avec moi.",
+    sub: "Quatre secondes à l'inspiration, quatre à l'expiration. Suivez le cercle quelques instants — c'est là que commence toute pratique.",
+    inhale: "Inspirez",
+    exhale: "Expirez",
   },
   footer: { tagline: "RYT-200® Yoga Alliance · Formée en Inde", rights: "Tous droits réservés." },
 };
